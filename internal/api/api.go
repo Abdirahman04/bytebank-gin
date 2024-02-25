@@ -1,7 +1,9 @@
 package api
 
-import "fmt"
+import "github.com/gin-gonic/gin"
 
 func Start() {
-  fmt.Println("Server started on port 8080")
+  r := gin.Default()
+  r.GET("/ping", Ping)
+  r.Run()
 }

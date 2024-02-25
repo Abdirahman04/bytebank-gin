@@ -1,18 +1,14 @@
 package main
 
 import (
-  "log"
-
-  "github.com/Abdirahman04/bytebank-gin/internal/api"
-  "github.com/joho/godotenv"
+	"github.com/Abdirahman04/bytebank-gin/internal/api"
+	"github.com/Abdirahman04/bytebank-gin/intializers"
+	"github.com/Abdirahman04/bytebank-gin/pkg/db"
 )
 
 func init() {
-  err := godotenv.Load()
-
-  if err != nil {
-    log.Fatal("Error loading .env file")
-  }
+  intializers.LoadEnvVariables()
+  db.ConnectToDb()
 }
 
 func main() {

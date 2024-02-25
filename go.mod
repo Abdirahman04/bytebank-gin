@@ -2,7 +2,10 @@ module github.com/Abdirahman04/bytebank-gin
 
 go 1.22.0
 
-require github.com/gin-gonic/gin v1.9.1
+require (
+  github.com/gin-gonic/gin v1.9.1
+  gorm.io/gorm v1.25.7
+)
 
 require (
 	github.com/bytedance/sonic v1.11.0 // indirect

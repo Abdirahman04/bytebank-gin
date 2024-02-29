@@ -14,3 +14,14 @@ func Save(customer Customer) (Customer, error) {
 
   return customer, nil
 }
+
+func FindAll() ([]Customer, error) {
+  var customers []Customer
+
+  result := db.DB.Find(&customers)
+  if result.Error != nil {
+    return nil, result.Error
+  }
+
+  return customers, nil
+}

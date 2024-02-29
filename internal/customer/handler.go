@@ -17,3 +17,15 @@ func Post(c *gin.Context) {
     "customer": res,
   })
 }
+
+func GetAll(c *gin.Context) {
+  res, err := FindAllCustomers()
+  if err != nil {
+    c.Status(400)
+    return
+  }
+
+  c.JSON(200, gin.H{
+    "customers": res,
+  })
+}

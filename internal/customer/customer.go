@@ -11,10 +11,10 @@ type Customer struct {
 }
 
 type CustomerRequest struct {
-  FirstName string
-  LastName string
-  Email string
-  Password string
+  FirstName string `json:"firstname"`
+  LastName string `json:"lastname"`
+  Email string `json:"email"`
+  Password string `json:"password"`
 }
 
 func NewCustomer(customer CustomerRequest) Customer {

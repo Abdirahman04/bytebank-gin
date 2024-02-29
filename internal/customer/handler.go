@@ -10,6 +10,6 @@ func Post(c *gin.Context) {
   }
   
   c.JSON(200, gin.H{
-    "result": res,
+    "customer": res,
   })
 }

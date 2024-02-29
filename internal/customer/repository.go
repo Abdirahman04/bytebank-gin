@@ -2,16 +2,15 @@ package customer
 
 import (
 	"errors"
-	"fmt"
 
 	"github.com/Abdirahman04/bytebank-gin/pkg/db"
 )
 
-func Save(customer Customer) (string, error) {
+func Save(customer Customer) (Customer, error) {
   result := db.DB.Create(&customer)
   if result.Error != nil {
-    return "", errors.New("Error saving customer")
+    return Customer{}, errors.New("Error saving customer")
   }
 
-  return fmt.Sprintln(result.RowsAffected), nil
+  return customer, nil
 }

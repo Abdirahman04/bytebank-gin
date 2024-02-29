@@ -10,6 +10,7 @@ func Start() {
 
   r.GET("/ping", Ping)
   r.POST("/customer", customer.Post)
+  r.GET("/customer", customer.GetAll)
 
   r.Run()
 }

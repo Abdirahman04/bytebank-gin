@@ -1,8 +1,8 @@
 package customer
 
-func SaveCustomer() (Customer, error) {
-  customer := Customer{FirstName: "Abdirahman", LastName: "Hassan", Email: "abdix@gmail", Password: "killmonger"}
+func SaveCustomer(customer CustomerRequest) (Customer, error) {
+  newCustomer := NewCustomer(customer)
 
-  res, err := Save(customer)
+  res, err := Save(newCustomer)
   return res, err
 }

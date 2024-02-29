@@ -24,7 +24,7 @@ func FindAllCustomers() ([]CustomerResponse, error) {
   return customers, nil
 }
 
-func FindById(id uint) (CustomerResponse, error) {
+func FindById(id string) (CustomerResponse, error) {
   res, err := FindOne(id)
   if err != nil {
     return CustomerResponse{}, err

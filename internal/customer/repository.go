@@ -26,7 +26,7 @@ func FindAll() ([]Customer, error) {
   return customers, nil
 }
 
-func FindOne(id uint) (Customer, error) {
+func FindOne(id string) (Customer, error) {
   var customer Customer
 
   result := db.DB.First(&customer, id)

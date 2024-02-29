@@ -29,3 +29,17 @@ func GetAll(c *gin.Context) {
     "customers": res,
   })
 }
+
+func GetOne(c *gin.Context) {
+  id := c.Param("id")
+
+  res, err := FindById(id)
+  if err != nil {
+    c.Status(400)
+    return
+  }
+
+  c.JSON(200, gin.H{
+    "customer": res,
+  })
+}

@@ -23,3 +23,13 @@ func FindAllCustomers() ([]CustomerResponse, error) {
 
   return customers, nil
 }
+
+func FindById(id uint) (CustomerResponse, error) {
+  res, err := FindOne(id)
+  if err != nil {
+    return CustomerResponse{}, err
+  }
+
+  customer := NewCustomerResponse(res)
+  return customer, nil
+}

@@ -25,3 +25,14 @@ func FindAll() ([]Customer, error) {
 
   return customers, nil
 }
+
+func FindOne(id uint) (Customer, error) {
+  var customer Customer
+
+  result := db.DB.First(&customer, id)
+  if result.Error != nil {
+    return customer, result.Error
+  }
+
+  return customer, nil
+}

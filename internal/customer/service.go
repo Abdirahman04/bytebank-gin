@@ -6,3 +6,20 @@ func SaveCustomer(customer CustomerRequest) (Customer, error) {
   res, err := Save(newCustomer)
   return res, err
 }
+
+func FindAllCustomers() ([]CustomerResponse, error) {
+  res, err := FindAll()
+  if err != nil {
+    return nil, err
+  }
+
+  var customers []CustomerResponse
+
+  for _, person := range res {
+    customer := NewCustomerResponse(person)
+
+    customers = append(customers, customer)
+  }
+
+  return customers, nil
+}

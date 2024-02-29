@@ -8,12 +8,10 @@ import (
 )
 
 func Save(customer Customer) (string, error) {
-  db, err := db.ConnectToDb()
-  if err != nil {
-    return "", errors.New("Error connecting to db")
+  result := db.DB.Create(&customer)
+  if result.Error != nil {
+    return "", errors.New("Error saving customer")
   }
 
-  result := db.Create(&customer)
-  
   return fmt.Sprintln(result.RowsAffected), nil
 }

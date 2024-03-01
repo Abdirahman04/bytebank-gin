@@ -35,3 +35,14 @@ func NewAccount(account AccountRequest) Account {
     Amount: account.Amount,
   }
 }
+
+func NewAccountResponse(account Account) AccountResponse {
+  return AccountResponse{
+    CustomerId: account.CustomerId,
+    AccountType: account.AccountType,
+    Amount: account.Amount,
+    CreatedAt: account.CreatedAt,
+    UpdatedAt: account.UpdatedAt,
+    DeletedAt: account.DeletedAt.Time,
+  }
+}

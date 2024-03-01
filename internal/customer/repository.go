@@ -36,3 +36,24 @@ func FindOne(id string) (Customer, error) {
 
   return customer, nil
 }
+
+func Update(id string, customer Customer) (Customer, error) {
+  var oldCustomer Customer
+
+  result := db.DB.First(&oldCustomer, id)
+  if result.Error != nil {
+    return oldCustomer, result.Error
+  }
+
+  result = db.DB.Model(&oldCustomer).Updates(Customer{
+    FirstName: customer.FirstName,
+    LastName: customer.LastName,
+    Email: customer.Email,
+    Password: customer.Password,
+  })
+  if result.Error != nil {
+    return oldCustomer, result.Error
+  }
+
+  return customer, nil
+}

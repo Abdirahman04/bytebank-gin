@@ -35,7 +35,9 @@ func GetOne(c *gin.Context) {
 
   res, err := FindById(id)
   if err != nil {
-    c.Status(400)
+    c.JSON(400, gin.H{
+      "error": "no user found",
+    })
     return
   }
 

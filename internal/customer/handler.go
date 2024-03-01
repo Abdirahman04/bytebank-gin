@@ -64,3 +64,13 @@ func UpdateOne(c *gin.Context) {
     "customer": res,
   })
 }
+
+func DeleteCustomer(c *gin.Context) {
+  id := c.Param("id")
+
+  DeleteOne(id)
+
+  c.JSON(200, gin.H{
+    "message": "account deleted successfully",
+  })
+}

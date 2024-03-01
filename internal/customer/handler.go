@@ -45,3 +45,22 @@ func GetOne(c *gin.Context) {
     "customer": res,
   })
 }
+
+func UpdateOne(c *gin.Context) {
+  id := c.Param("id")
+
+  var body CustomerRequest
+  c.Bind(&body)
+
+  res, err := UpdateCustomer(id, body)
+  if err != nil {
+    c.JSON(400, gin.H{
+      "error": err,
+    })
+    return
+  }
+
+  c.JSON(200, gin.H{
+    "customer": res,
+  })
+}

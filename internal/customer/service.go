@@ -46,3 +46,7 @@ func UpdateCustomer(id string, customer CustomerRequest) (CustomerResponse, erro
   
   return resCustomer, nil
 }
+
+func DeleteOne(id string) {
+  Delete(id)
+}

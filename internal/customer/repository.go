@@ -2,6 +2,7 @@ package customer
 
 import (
 	"errors"
+	"log"
 
 	"github.com/Abdirahman04/bytebank-gin/pkg/db"
 )
@@ -44,16 +45,19 @@ func Update(id string, customer Customer) (Customer, error) {
   if result.Error != nil {
     return oldCustomer, result.Error
   }
+  log.Println(oldCustomer)
 
-  result = db.DB.Model(&oldCustomer).Updates(Customer{
+  db.DB.Model(&oldCustomer).Updates(Customer{
     FirstName: customer.FirstName,
     LastName: customer.LastName,
     Email: customer.Email,
     Password: customer.Password,
   })
-  if result.Error != nil {
-    return oldCustomer, result.Error
-  }
+  log.Println(oldCustomer)
 
   return customer, nil
+}
+
+func Delete(id string) {
+  db.DB.Delete(&Customer{}, id)
 }

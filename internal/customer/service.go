@@ -33,3 +33,16 @@ func FindById(id string) (CustomerResponse, error) {
   customer := NewCustomerResponse(res)
   return customer, nil
 }
+
+func UpdateCustomer(id string, customer CustomerRequest) (CustomerResponse, error) {
+  newCustomer := NewCustomer(customer)
+
+  res, err := Update(id, newCustomer)
+  if err != nil {
+    return CustomerResponse{}, err
+  }
+
+  resCustomer := NewCustomerResponse(res)
+  
+  return resCustomer, nil
+}

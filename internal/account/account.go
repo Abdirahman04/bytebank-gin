@@ -27,3 +27,11 @@ type AccountResponse struct {
   UpdatedAt time.Time `json:"updatedat"`
   DeletedAt time.Time `json:"deletedat"`
 }
+
+func NewAccount(account AccountRequest) Account {
+  return Account{
+    CustomerId: account.CustomerId,
+    AccountType: account.AccountType,
+    Amount: account.Amount,
+  }
+}

@@ -1,6 +1,18 @@
 package account
 
+import (
+	"errors"
+	"strconv"
+
+	"github.com/Abdirahman04/bytebank-gin/internal/customer"
+)
+
 func SaveAccount(account AccountRequest) (AccountResponse, error) {
+  _, err := customer.FindById(strconv.Itoa(int(account.CustomerId)))
+  if err != nil {
+    return AccountResponse{}, errors.New("customerId not found")
+  }
+
   newAccount := NewAccount(account)
 
   res, err := Save(newAccount)

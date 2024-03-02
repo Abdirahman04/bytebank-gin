@@ -10,7 +10,7 @@ func Post(c *gin.Context) {
   res, err := SaveAccount(account)
   if err != nil {
     c.JSON(400, gin.H{
-      "error": "unable to save account",
+      "error": err.Error(),
     })
     return
   }

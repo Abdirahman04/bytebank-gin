@@ -19,6 +19,7 @@ func Start() {
   r.GET("/account", account.GetAll)
   r.GET("/account/:id", account.GetOne)
   r.GET("/account/customer/:id", account.GetAllById)
+  r.DELETE("/account/:id", account.DeleteOne)
 
   r.Run()
 }

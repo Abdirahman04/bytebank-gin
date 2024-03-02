@@ -8,3 +8,9 @@ type Transaction struct {
   TransactionType string
   Balance float32
 }
+
+type TransactionRequest struct {
+  AccountId uint `json:"accountid"`
+  TransactionType string `json:"transactiontype"`
+  Balance float32 `json:"balance"`
+}

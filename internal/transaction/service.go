@@ -18,7 +18,7 @@ func ChangeAmount(transaction Transaction) error {
   } else if typ == "withdraw" {
     err = account.ChandeAccountAmount(id, -transaction.Balance)
   } else {
-    target := strconv.FormatUint(uint64(transaction.AccountId), 10)
+    target := transaction.Target
     err = account.ChandeAccountAmount(id, -transaction.Balance)
     if err != nil {
       return err

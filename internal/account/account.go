@@ -19,6 +19,7 @@ type AccountRequest struct {
 }
 
 type AccountResponse struct {
+  Id uint `json:"id"`
   CustomerId uint `json:"customerid"`
   AccountType string `json:"accounttype"`
   Amount float32 `json:"amount"`
@@ -37,6 +38,7 @@ func NewAccount(account AccountRequest) Account {
 
 func NewAccountResponse(account Account) AccountResponse {
   return AccountResponse{
+    Id: account.ID,
     CustomerId: account.CustomerId,
     AccountType: account.AccountType,
     Amount: account.Amount,

@@ -16,6 +16,7 @@ func Start() {
   r.GET("/customer", customer.GetAll)
   r.GET("/customer/:id", customer.GetOne)
   r.PUT("/customer/:id", customer.UpdateOne)
+  r.DELETE("/customer/:id", customer.DeleteCustomer)
 
   r.POST("/account", account.Post)
   r.GET("/account", account.GetAll)
@@ -24,7 +25,7 @@ func Start() {
   r.DELETE("/account/:id", account.DeleteOne)
 
   r.POST("/transaction", transaction.Post)
-  r.GET("transaction", transaction.Get)
+  r.GET("/transaction", transaction.Get)
 
   r.Run()
 }

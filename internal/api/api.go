@@ -26,6 +26,9 @@ func Start() {
 
   r.POST("/transaction", transaction.Post)
   r.GET("/transaction", transaction.Get)
+  r.GET("/transaction/:id", transaction.GetById)
+  r.GET("/transaction/account/:id", transaction.GetByAccountId)
+  r.DELETE("/transaction/:id", transaction.DeleteOne)
 
   r.Run()
 }

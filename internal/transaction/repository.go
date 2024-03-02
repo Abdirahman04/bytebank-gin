@@ -36,3 +36,14 @@ func FindById(id string) (Transaction, error) {
 
   return transaction, nil
 }
+
+func FindAllById(id string) ([]Transaction, error) {
+  var transactions []Transaction
+
+  result := db.DB.Where("account_id = ?", id).Find(&transactions)
+  if result.Error != nil {
+    return nil, result.Error
+  }
+
+  return transactions, nil
+}

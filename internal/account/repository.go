@@ -61,3 +61,7 @@ func ChangeAmount(id string, amount float32) error {
   db.DB.Model(&account).Update("amount", newAmount)
   return nil
 }
+
+func Delete(id string) {
+  db.DB.Delete(&Account{}, id)
+}

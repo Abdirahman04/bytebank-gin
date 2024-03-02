@@ -19,3 +19,17 @@ func Post(c *gin.Context) {
     "transaction": res,
   })
 }
+
+func Get(c *gin.Context) {
+  res, err := GetAllTransactions()
+  if err != nil {
+    c.JSON(400, gin.H{
+      "error": err.Error(),
+    })
+    return
+  }
+
+  c.JSON(200, gin.H{
+    "transactions": res,
+  })
+}

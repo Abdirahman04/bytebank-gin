@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/Abdirahman04/bytebank-gin/internal/account"
+	"github.com/Abdirahman04/bytebank-gin/validations"
 )
 
 func ChangeAmount(transaction Transaction) error {
@@ -31,6 +32,18 @@ func ChangeAmount(transaction Transaction) error {
 }
 
 func SaveTransaction(transaction TransactionRequest) (TransactionResponse, error) {
+  validType := validations.CheckTransactionType(transaction.TransactionType)
+  if !validType {
+    return TransactionResponse{}, errors.New("invalid transaction type")
+  }
+
+  if transaction.TransactionType == "transfer" {
+    _, err := account.FindOne(transaction.Target)
+    if err != nil {
+      return TransactionResponse{}, errors.New("invalid target id")
+    }
+  }
+
   _, err := account.FindOne(strconv.FormatUint(uint64(transaction.AccountId), 10))
   if err != nil {
     return TransactionResponse{}, errors.New("invalid account id")
@@ -39,6 +52,11 @@ func SaveTransaction(transaction TransactionRequest) (TransactionResponse, error
   newTransaction := NewTransaction(transaction)
 
   res, err := Save(newTransaction)
+  if err != nil {
+    return TransactionResponse{}, err
+  }
+
+  err = ChangeAmount(res)
   if err != nil {
     return TransactionResponse{}, err
   }

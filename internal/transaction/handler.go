@@ -33,3 +33,19 @@ func Get(c *gin.Context) {
     "transactions": res,
   })
 }
+
+func GetById(c *gin.Context) {
+  id := c.Param("id")
+
+  res, err := FindTransactionById(id)
+  if err != nil {
+    c.JSON(400, gin.H{
+      "error": err.Error(),
+    })
+    return
+  }
+
+  c.JSON(200, gin.H{
+    "transaction": res,
+  })
+}

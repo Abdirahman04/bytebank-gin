@@ -75,3 +75,7 @@ func ChandeAccountAmount(id string, amount float32) error {
 
   return err
 }
+
+func DeleteAccount(id string) {
+  Delete(id)
+}

@@ -69,3 +69,9 @@ func FindAllByCustomerId(id string) ([]AccountResponse, error) {
 
   return accounts, nil
 }
+
+func ChandeAccountAmount(id string, amount float32) error {
+  err := ChangeAmount(id, amount)
+
+  return err
+}

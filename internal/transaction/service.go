@@ -92,3 +92,20 @@ func FindTransactionById(id string) (TransactionResponse, error) {
 
   return transaction, nil
 }
+
+func FindTransactionsByAccountId(id string) ([]TransactionResponse, error) {
+  res, err := FindAllById(id)
+  if err != nil {
+    return nil, err
+  }
+
+  var transactions []TransactionResponse
+
+  for _, trans := range res {
+    transaction := NewTransactionResponse(trans)
+
+    transactions = append(transactions, transaction)
+  }
+
+  return transactions, nil
+}

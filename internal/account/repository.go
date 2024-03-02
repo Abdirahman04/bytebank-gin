@@ -40,10 +40,24 @@ func FindOne(id string) (Account, error) {
 func FindAllById(id string) ([]Account, error) {
   var accounts []Account
 
-  result := db.DB.Where("customer_id <> ?", id).Find(&accounts)
+  result := db.DB.Where("customer_id = ?", id).Find(&accounts)
   if result.Error != nil {
     return nil, errors.New("unable to fetch accounts")
   }
   
   return accounts, nil
+}
+
+func ChangeAmount(id string, amount float32) error {
+  var account Account
+
+  result := db.DB.First(&account, id)
+  if result.Error != nil {
+    return errors.New("no account found")
+  }
+
+  newAmount := account.Amount + amount
+
+  db.DB.Model(&account).Update("amount", newAmount)
+  return nil
 }

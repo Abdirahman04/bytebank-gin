@@ -65,3 +65,13 @@ func GetByAccountId(c *gin.Context) {
     "transactions": res,
   })
 }
+
+func DeleteOne(c *gin.Context) {
+  id := c.Param("id")
+
+  DeleteTransaction(id)
+
+  c.JSON(200, gin.H{
+    "message": "transaction deleted successfully",
+  })
+}

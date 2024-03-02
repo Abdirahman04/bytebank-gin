@@ -12,3 +12,20 @@ func SaveAccount(account AccountRequest) (AccountResponse, error) {
 
   return resAccount, nil
 }
+
+func FindAllAccounts() ([]AccountResponse, error) {
+  res, err := FindAll()
+  if err != nil {
+    return nil, err
+  }
+
+  var accounts []AccountResponse
+
+  for _, account := range res {
+    newAccount := NewAccountResponse(account)
+
+    accounts = append(accounts, newAccount)
+  }
+
+  return accounts, nil
+}

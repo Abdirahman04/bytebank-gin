@@ -36,3 +36,15 @@ func NewTransaction(transaction TransactionRequest) Transaction {
     Balance: transaction.Balance,
   }
 }
+
+func NewTransactionResponse(transaction Transaction) TransactionResponse {
+  return TransactionResponse{
+    Id: transaction.ID,
+    AccountId: transaction.AccountId,
+    TransactionType: transaction.TransactionType,
+    Balance: transaction.Balance,
+    CreatedAt: transaction.CreatedAt,
+    UpdatedAt: transaction.UpdatedAt,
+    DeletedAt: transaction.DeletedAt.Time,
+  }
+}

@@ -7,6 +7,29 @@ import (
 	"github.com/Abdirahman04/bytebank-gin/internal/account"
 )
 
+func ChangeAmount(transaction Transaction) error {
+  id := strconv.FormatUint(uint64(transaction.AccountId), 10)
+  typ := transaction.TransactionType
+
+  var err error
+
+  if typ == "deposit" {
+    err = account.ChandeAccountAmount(id, transaction.Balance)
+  } else if typ == "withdraw" {
+    err = account.ChandeAccountAmount(id, -transaction.Balance)
+  } else {
+    target := strconv.FormatUint(uint64(transaction.AccountId), 10)
+    err = account.ChandeAccountAmount(id, -transaction.Balance)
+    if err != nil {
+      return err
+    }
+
+    err = account.ChandeAccountAmount(target, transaction.Balance)
+  }
+
+  return err
+}
+
 func SaveTransaction(transaction TransactionRequest) (TransactionResponse, error) {
   _, err := account.FindOne(strconv.FormatUint(uint64(transaction.AccountId), 10))
   if err != nil {

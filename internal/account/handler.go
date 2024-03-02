@@ -49,3 +49,19 @@ func GetOne(c *gin.Context) {
     "account": res,
   })
 }
+
+func GetAllById(c *gin.Context) {
+  id := c.Param("id")
+
+  res, err := FindAllByCustomerId(id)
+  if err != nil {
+    c.JSON(400, gin.H{
+      "error": err.Error(),
+    })
+    return
+  }
+
+  c.JSON(200, gin.H{
+    "accounts": res,
+  })
+}

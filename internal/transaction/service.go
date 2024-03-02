@@ -1,6 +1,18 @@
 package transaction
 
+import (
+	"errors"
+	"strconv"
+
+	"github.com/Abdirahman04/bytebank-gin/internal/account"
+)
+
 func SaveTransaction(transaction TransactionRequest) (TransactionResponse, error) {
+  _, err := account.FindOne(strconv.FormatUint(uint64(transaction.AccountId), 10))
+  if err != nil {
+    return TransactionResponse{}, errors.New("invalid account id")
+  }
+
   newTransaction := NewTransaction(transaction)
 
   res, err := Save(newTransaction)

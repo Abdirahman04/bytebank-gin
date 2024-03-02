@@ -81,3 +81,14 @@ func GetAllTransactions() ([]TransactionResponse, error) {
 
   return transactions, nil
 }
+
+func FindTransactionById(id string) (TransactionResponse, error) {
+  res, err := FindById(id)
+  if err != nil {
+    return TransactionResponse{}, err
+  }
+
+  transaction := NewTransactionResponse(res)
+
+  return transaction, nil
+}

@@ -10,3 +10,14 @@ func Save(account Account) (Account, error) {
 
   return account, nil
 }
+
+func FindAll() ([]Account, error) {
+  var accounts []Account
+
+  result := db.DB.Find(&accounts)
+  if result.Error != nil {
+    return nil, result.Error
+  }
+
+  return accounts, nil
+}

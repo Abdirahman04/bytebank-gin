@@ -65,3 +65,13 @@ func GetAllById(c *gin.Context) {
     "accounts": res,
   })
 }
+
+func DeleteOne(c *gin.Context) {
+  id := c.Param("id")
+
+  DeleteAccount(id)
+
+  c.JSON(200, gin.H{
+    "message": "account deleted successfully",
+  })
+}

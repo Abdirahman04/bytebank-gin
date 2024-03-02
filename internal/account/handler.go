@@ -19,3 +19,17 @@ func Post(c *gin.Context) {
     "account": res,
   })
 }
+
+func GetAll(c *gin.Context) {
+  res, err := FindAllAccounts()
+  if err != nil {
+    c.JSON(400, gin.H{
+      "error": "unable to fetch accounts",
+    })
+    return
+  }
+
+  c.JSON(200, gin.H{
+    "accounts": res,
+  })
+}

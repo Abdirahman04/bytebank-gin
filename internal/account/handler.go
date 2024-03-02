@@ -40,7 +40,7 @@ func GetOne(c *gin.Context) {
   res, err := FindById(id)
   if err != nil {
     c.JSON(400, gin.H{
-      "error": err,
+      "error": err.Error(),
     })
     return
   }

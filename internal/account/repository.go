@@ -36,3 +36,14 @@ func FindOne(id string) (Account, error) {
 
   return account, nil
 }
+
+func FindAllById(id string) ([]Account, error) {
+  var accounts []Account
+
+  result := db.DB.Where("customer_id <> ?", id).Find(&accounts)
+  if result.Error != nil {
+    return nil, errors.New("unable to fetch accounts")
+  }
+  
+  return accounts, nil
+}

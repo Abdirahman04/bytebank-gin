@@ -47,3 +47,7 @@ func FindAllById(id string) ([]Transaction, error) {
 
   return transactions, nil
 }
+
+func Delete(id string) {
+  db.DB.Delete(&Transaction{}, id)
+}

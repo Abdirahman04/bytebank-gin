@@ -41,3 +41,14 @@ func FindAllAccounts() ([]AccountResponse, error) {
 
   return accounts, nil
 }
+
+func FindById(id string) (AccountResponse, error) {
+  res, err := FindOne(id)
+  if err != nil {
+    return AccountResponse{}, err
+  }
+
+  account := NewAccountResponse(res)
+
+  return account, nil
+}

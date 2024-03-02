@@ -14,3 +14,14 @@ func Save(transaction Transaction) (Transaction, error) {
 
   return transaction, nil
 }
+
+func GetAll() ([]Transaction, error) {
+  var transactions []Transaction
+
+  result := db.DB.Find(&transactions)
+  if result.Error != nil {
+    return nil, errors.New("unable to fetch transactions")
+  }
+
+  return transactions, nil
+}

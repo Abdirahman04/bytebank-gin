@@ -28,3 +28,11 @@ type TransactionResponse struct {
   UpdatedAt time.Time `json:"updatedat"`
   DeletedAt time.Time `json:"deletedat"`
 }
+
+func NewTransaction(transaction TransactionRequest) Transaction {
+  return Transaction{
+    AccountId: transaction.AccountId,
+    TransactionType: transaction.TransactionType,
+    Balance: transaction.Balance,
+  }
+}

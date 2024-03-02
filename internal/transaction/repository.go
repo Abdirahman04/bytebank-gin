@@ -25,3 +25,14 @@ func GetAll() ([]Transaction, error) {
 
   return transactions, nil
 }
+
+func FindById(id string) (Transaction, error) {
+  var transaction Transaction
+
+  result := db.DB.First(&transaction, id)
+  if result.Error != nil {
+    return Transaction{}, errors.New("no transaction found")
+  }
+
+  return transaction, nil
+}

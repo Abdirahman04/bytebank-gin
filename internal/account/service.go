@@ -52,3 +52,20 @@ func FindById(id string) (AccountResponse, error) {
 
   return account, nil
 }
+
+func FindAllByCustomerId(id string) ([]AccountResponse, error) {
+  var accounts []AccountResponse
+
+  res, err := FindAllById(id)
+  if err != nil {
+    return nil, err
+  }
+
+  for _, account := range res {
+    newAccount := NewAccountResponse(account)
+
+    accounts = append(accounts, newAccount)
+  }
+
+  return accounts, nil
+}

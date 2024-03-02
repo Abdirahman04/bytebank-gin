@@ -109,3 +109,7 @@ func FindTransactionsByAccountId(id string) ([]TransactionResponse, error) {
 
   return transactions, nil
 }
+
+func DeleteTransaction(id string) {
+  Delete(id)
+}

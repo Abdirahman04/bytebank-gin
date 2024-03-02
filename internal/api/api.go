@@ -17,6 +17,7 @@ func Start() {
 
   r.POST("/account", account.Post)
   r.GET("/account", account.GetAll)
+  r.GET("/account/:id", account.GetOne)
 
   r.Run()
 }

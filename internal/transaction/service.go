@@ -111,8 +111,11 @@ func FindTransactionById(id string) (TransactionResponse, error) {
 }
 
 func FindTransactionsByAccountId(id string) ([]TransactionResponse, error) {
+  al := logger.NewAggregatedLogger()
+
   res, err := FindAllById(id)
   if err != nil {
+    al.Warn(err.Error())
     return nil, err
   }
 

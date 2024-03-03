@@ -1,6 +1,19 @@
 package customer
 
+import (
+	"github.com/Abdirahman04/bytebank-gin/logger"
+	"github.com/Abdirahman04/bytebank-gin/validations"
+)
+
 func SaveCustomer(customer CustomerRequest) (Customer, error) {
+  al := logger.NewAggregatedLogger()
+
+  err := validations.ValidateCustomer(customer)
+  if err != nil {
+    al.Info(err.Error())
+    return Customer{}, err
+  }
+
   newCustomer := NewCustomer(customer)
 
   res, err := Save(newCustomer)

@@ -41,8 +41,11 @@ func FindAllCustomers() ([]CustomerResponse, error) {
 }
 
 func FindById(id string) (CustomerResponse, error) {
+  al := logger.NewAggregatedLogger()
+
   res, err := FindOne(id)
   if err != nil {
+    al.Warn(err.Error())
     return CustomerResponse{}, err
   }
 

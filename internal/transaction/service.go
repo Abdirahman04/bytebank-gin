@@ -77,10 +77,13 @@ func SaveTransaction(transaction TransactionRequest) (TransactionResponse, error
 }
 
 func GetAllTransactions() ([]TransactionResponse, error) {
+  al := logger.NewAggregatedLogger()
+
   var transactions []TransactionResponse
 
   res, err := GetAll()
   if err != nil {
+    al.Warn(err.Error())
     return nil, err
   }
 

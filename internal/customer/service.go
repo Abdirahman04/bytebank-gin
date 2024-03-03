@@ -54,10 +54,13 @@ func FindById(id string) (CustomerResponse, error) {
 }
 
 func UpdateCustomer(id string, customer CustomerRequest) (CustomerResponse, error) {
+  al := logger.NewAggregatedLogger()
+
   newCustomer := NewCustomer(customer)
 
   res, err := Update(id, newCustomer)
   if err != nil {
+    al.Warn(err.Error())
     return CustomerResponse{}, err
   }
 

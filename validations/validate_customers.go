@@ -3,18 +3,16 @@ package validations
 import (
 	"errors"
 	"regexp"
-
-	"github.com/Abdirahman04/bytebank-gin/internal/customer"
 )
 
-func ValidateCustomer(customer customer.CustomerRequest) error {
-  if len(customer.FirstName) < 3 {
+func ValidateCustomer(customer [4]string) error {
+  if len(customer[0]) < 3 {
     return errors.New("First name should be atleast 3 characters long")
-  } else if len(customer.LastName) < 3 {
+  } else if len(customer[1]) < 3 {
     return errors.New("Last name should be atleast 3 characters long")
-  } else if !isValidEmail(customer.Email) {
+  } else if !isValidEmail(customer[2]) {
     return errors.New("Invalid email")
-  } else if len(customer.Password) < 5 {
+  } else if len(customer[3]) < 5 {
     return errors.New("The password should be atleast 5 characters long")
   } else {
     return nil

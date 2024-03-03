@@ -8,7 +8,14 @@ import (
 func SaveCustomer(customer CustomerRequest) (Customer, error) {
   al := logger.NewAggregatedLogger()
 
-  err := validations.ValidateCustomer(customer)
+  customerArr := [4]string{
+    customer.FirstName,
+    customer.LastName,
+    customer.Email,
+    customer.Password,
+  }
+
+  err := validations.ValidateCustomer(customerArr)
   if err != nil {
     al.Warn(err.Error())
     return Customer{}, err

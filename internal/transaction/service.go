@@ -36,20 +36,25 @@ func ChangeAmount(transaction Transaction) error {
 }
 
 func SaveTransaction(transaction TransactionRequest) (TransactionResponse, error) {
+  al := logger.NewAggregatedLogger()
+
   validType := validations.CheckTransactionType(transaction.TransactionType)
   if !validType {
+    al.Warn("Invalid transaction type")
     return TransactionResponse{}, errors.New("invalid transaction type")
   }
 
   if transaction.TransactionType == "transfer" {
     _, err := account.FindOne(transaction.Target)
     if err != nil {
+      al.Warn(err.Error())
       return TransactionResponse{}, errors.New("invalid target id")
     }
   }
 
   _, err := account.FindOne(strconv.FormatUint(uint64(transaction.AccountId), 10))
   if err != nil {
+    al.Warn(err.Error())
     return TransactionResponse{}, errors.New("invalid account id")
   }
 
@@ -57,11 +62,13 @@ func SaveTransaction(transaction TransactionRequest) (TransactionResponse, error
 
   res, err := Save(newTransaction)
   if err != nil {
+    al.Warn(err.Error())
     return TransactionResponse{}, err
   }
 
   err = ChangeAmount(res)
   if err != nil {
+    al.Warn(err.Error())
     return TransactionResponse{}, err
   }
 

@@ -46,6 +46,3 @@ func NewAggregatedLogger() AggregatedLogger {
   }
 }
 
-func EndpointLog(fn string, r *http.Request) string {
-  return fmt.Sprintf("Endpoint hit: %v, method: %v, path: %v", fn, r.Method, r.URL.Path)
-}

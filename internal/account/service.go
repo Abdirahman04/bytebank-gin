@@ -5,11 +5,15 @@ import (
 	"strconv"
 
 	"github.com/Abdirahman04/bytebank-gin/internal/customer"
+	"github.com/Abdirahman04/bytebank-gin/logger"
 )
 
 func SaveAccount(account AccountRequest) (AccountResponse, error) {
+  al := logger.NewAggregatedLogger()
+
   _, err := customer.FindById(strconv.Itoa(int(account.CustomerId)))
   if err != nil {
+    al.Warn(err.Error())
     return AccountResponse{}, errors.New("customerId not found")
   }
 
@@ -17,6 +21,7 @@ func SaveAccount(account AccountRequest) (AccountResponse, error) {
 
   res, err := Save(newAccount)
   if err != nil {
+    al.Warn(err.Error())
     return AccountResponse{}, err
   }
 

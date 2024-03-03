@@ -65,10 +65,13 @@ func FindById(id string) (AccountResponse, error) {
 }
 
 func FindAllByCustomerId(id string) ([]AccountResponse, error) {
+  al := logger.NewAggregatedLogger()
+
   var accounts []AccountResponse
 
   res, err := FindAllById(id)
   if err != nil {
+    al.Warn(err.Error())
     return nil, err
   }
 

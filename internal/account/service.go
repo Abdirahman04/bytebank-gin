@@ -31,8 +31,11 @@ func SaveAccount(account AccountRequest) (AccountResponse, error) {
 }
 
 func FindAllAccounts() ([]AccountResponse, error) {
+  al := logger.NewAggregatedLogger()
+
   res, err := FindAll()
   if err != nil {
+    al.Warn(err.Error())
     return nil, err
   }
 

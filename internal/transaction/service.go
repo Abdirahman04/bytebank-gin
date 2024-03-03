@@ -5,10 +5,13 @@ import (
 	"strconv"
 
 	"github.com/Abdirahman04/bytebank-gin/internal/account"
+	"github.com/Abdirahman04/bytebank-gin/logger"
 	"github.com/Abdirahman04/bytebank-gin/validations"
 )
 
 func ChangeAmount(transaction Transaction) error {
+  al := logger.NewAggregatedLogger()
+
   id := strconv.FormatUint(uint64(transaction.AccountId), 10)
   typ := transaction.TransactionType
 
@@ -22,6 +25,7 @@ func ChangeAmount(transaction Transaction) error {
     target := transaction.Target
     err = account.ChandeAccountAmount(id, -transaction.Balance)
     if err != nil {
+      al.Warn(err.Error())
       return err
     }
 

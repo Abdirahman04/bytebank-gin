@@ -97,8 +97,11 @@ func GetAllTransactions() ([]TransactionResponse, error) {
 }
 
 func FindTransactionById(id string) (TransactionResponse, error) {
+  al := logger.NewAggregatedLogger()
+
   res, err := FindById(id)
   if err != nil {
+    al.Warn(err.Error())
     return TransactionResponse{}, err
   }
 

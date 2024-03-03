@@ -51,8 +51,11 @@ func FindAllAccounts() ([]AccountResponse, error) {
 }
 
 func FindById(id string) (AccountResponse, error) {
+  al := logger.NewAggregatedLogger()
+
   res, err := FindOne(id)
   if err != nil {
+    al.Warn(err.Error())
     return AccountResponse{}, err
   }
 

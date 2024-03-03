@@ -3,6 +3,7 @@ package transaction
 import (
 	"errors"
 
+	"github.com/Abdirahman04/bytebank-gin/logger"
 	"github.com/Abdirahman04/bytebank-gin/pkg/db"
 )
 
@@ -12,6 +13,7 @@ func Save(transaction Transaction) (Transaction, error) {
     return Transaction{}, errors.New("unable to save transaction")
   }
 
+  logger.LG.Info("transaction created")
   return transaction, nil
 }
 
@@ -23,6 +25,7 @@ func GetAll() ([]Transaction, error) {
     return nil, errors.New("unable to fetch transactions")
   }
 
+  logger.LG.Info("all transactions fetched")
   return transactions, nil
 }
 
@@ -34,6 +37,7 @@ func FindById(id string) (Transaction, error) {
     return Transaction{}, errors.New("no transaction found")
   }
 
+  logger.LG.Info("one transaction fetched")
   return transaction, nil
 }
 
@@ -45,9 +49,11 @@ func FindAllById(id string) ([]Transaction, error) {
     return nil, result.Error
   }
 
+  logger.LG.Info("all transactions per account id fetched")
   return transactions, nil
 }
 
 func Delete(id string) {
   db.DB.Delete(&Transaction{}, id)
+  logger.LG.Info("transaction deleted")
 }

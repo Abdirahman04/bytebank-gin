@@ -1,11 +1,11 @@
 package logger
 
 import (
-	"fmt"
 	"log"
-	"net/http"
 	"os"
 )
+
+var LG AggregatedLogger
 
 type AggregatedLogger struct {
   infoLogger *log.Logger

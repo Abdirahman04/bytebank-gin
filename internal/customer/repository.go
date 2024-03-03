@@ -4,6 +4,7 @@ import (
 	"errors"
 	"log"
 
+	"github.com/Abdirahman04/bytebank-gin/logger"
 	"github.com/Abdirahman04/bytebank-gin/pkg/db"
 )
 
@@ -13,6 +14,7 @@ func Save(customer Customer) (Customer, error) {
     return Customer{}, errors.New("Error saving customer")
   }
 
+  logger.LG.Info("customer created")
   return customer, nil
 }
 
@@ -24,6 +26,7 @@ func FindAll() ([]Customer, error) {
     return nil, result.Error
   }
 
+  logger.LG.Info("all customers fetched")
   return customers, nil
 }
 
@@ -35,6 +38,7 @@ func FindOne(id string) (Customer, error) {
     return customer, result.Error
   }
 
+  logger.LG.Info("one customer fetched")
   return customer, nil
 }
 
@@ -55,9 +59,11 @@ func Update(id string, customer Customer) (Customer, error) {
   })
   log.Println(oldCustomer)
 
+  logger.LG.Info("customer updated")
   return customer, nil
 }
 
 func Delete(id string) {
   db.DB.Delete(&Customer{}, id)
+  logger.LG.Info("customer deleted")
 }

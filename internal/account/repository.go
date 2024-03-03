@@ -3,6 +3,7 @@ package account
 import (
 	"errors"
 
+	"github.com/Abdirahman04/bytebank-gin/logger"
 	"github.com/Abdirahman04/bytebank-gin/pkg/db"
 )
 
@@ -12,6 +13,7 @@ func Save(account Account) (Account, error) {
     return Account{}, errors.New("unable to save account")
   }
 
+  logger.LG.Info("account created")
   return account, nil
 }
 
@@ -23,6 +25,7 @@ func FindAll() ([]Account, error) {
     return nil, result.Error
   }
 
+  logger.LG.Info("all accounts fetched")
   return accounts, nil
 }
 
@@ -34,6 +37,7 @@ func FindOne(id string) (Account, error) {
     return Account{}, errors.New("no account found")
   }
 
+  logger.LG.Info("one account fetched")
   return account, nil
 }
 
@@ -45,6 +49,7 @@ func FindAllById(id string) ([]Account, error) {
     return nil, errors.New("unable to fetch accounts")
   }
   
+  logger.LG.Info("all accounts per customer id fetched")
   return accounts, nil
 }
 
@@ -59,9 +64,11 @@ func ChangeAmount(id string, amount float32) error {
   newAmount := account.Amount + amount
 
   db.DB.Model(&account).Update("amount", newAmount)
+  logger.LG.Info("account amount changed")
   return nil
 }
 
 func Delete(id string) {
   db.DB.Delete(&Account{}, id)
+  logger.LG.Info("account deleted")
 }

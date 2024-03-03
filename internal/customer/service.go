@@ -10,7 +10,7 @@ func SaveCustomer(customer CustomerRequest) (Customer, error) {
 
   err := validations.ValidateCustomer(customer)
   if err != nil {
-    al.Info(err.Error())
+    al.Warn(err.Error())
     return Customer{}, err
   }
 
@@ -21,8 +21,11 @@ func SaveCustomer(customer CustomerRequest) (Customer, error) {
 }
 
 func FindAllCustomers() ([]CustomerResponse, error) {
+  al := logger.NewAggregatedLogger()
+
   res, err := FindAll()
   if err != nil {
+    al.Warn(err.Error())
     return nil, err
   }
 
